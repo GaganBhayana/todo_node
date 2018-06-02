@@ -2,15 +2,16 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models');//it will automatically require the index.js inside models and from there we will get the reference
 
+
 router.get('/',function(req,res){
 	db.Todo.find()
 	.then(function(todos){
-		res.send(todos); 
+		res.json(todos); 
 	})
 	.catch(function(err){
 		res.send(err);
 	})
-})
+}) 
 
 router.post('/',function(req,res){
 	db.Todo.create(req.body)
@@ -20,10 +21,11 @@ router.post('/',function(req,res){
 	.catch(function(err){
 		res.send(err);
 	})
+	// console.log(req.body);
 });
 
 router.get('/:todoId',function(req,res){
-	db.Todo.findById(req.params.todoIdo)
+	db.Todo.findById(req.params.todoId)
 	.then(function(foundTodo){
 		res.json(foundTodo) 
 	})
@@ -46,7 +48,7 @@ router.put('/:todoId',function(req,res){
 router.delete('/:todoId',function(req,res){
 	db.Todo.remove({_id:req.params.todoId})
 	.then(function(){
-		res.json({message:'Temporary message'})
+		res.json({message:'deleted successfully'})
 	})
 	.catch(function(err){
 		res.send(err);
