@@ -5,4 +5,4 @@ mongoose.connect('mongodb://localhost/todo_api');
 
 mongoose.Promise = Promise; //now we can use .then() rather than using a callback function
  
-module.exports.Todo = require('./todo'); 
+module.exports.Todo = require('./todo');  
